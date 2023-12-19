@@ -49,6 +49,16 @@ export class HouseController extends BaseController {
         }
     }
 
+    async removeHouse(request, response, next) {
+        try {
+            const houseId = request.params.houseId
+            const message = await houseService.removeHouse(houseId)
+
+        } catch (error) {
+            next(error)
+        }
+    }
+
 
 
 

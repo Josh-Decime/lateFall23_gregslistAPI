@@ -22,6 +22,14 @@ class HouseService {
         const houses = await dbContext.House.find({ bedrooms: searchBedroom })
         return houses
     }
+    async removeHouse(houseId) {
+        const houseToRemove = await dbContext.House.findById(houseId)
+        if (!houseToRemove) {
+            throw new Error(`No house found at id: ${houseId}`)
+        }
+        await houseToRemove.remove()
+        return `The ${houseToRemove.price} house built in ${houseToRemove.year} was removed`
+    }
 
 
 }
