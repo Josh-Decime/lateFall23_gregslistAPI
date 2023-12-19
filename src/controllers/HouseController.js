@@ -9,6 +9,7 @@ export class HouseController extends BaseController {
             .get('', this.getHouses)
             .get('/:houseId', this.getOneHouse)
             .get('/searchBedroom/:bedrooms', this.searchHouses)
+            .delete('/:houseId', this.removeHouse)
     }
 
     async createHouses(request, response, next) {
@@ -53,7 +54,7 @@ export class HouseController extends BaseController {
         try {
             const houseId = request.params.houseId
             const message = await houseService.removeHouse(houseId)
-
+            response.send(message)
         } catch (error) {
             next(error)
         }
