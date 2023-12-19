@@ -10,6 +10,7 @@ export class HouseController extends BaseController {
             .get('/:houseId', this.getOneHouse)
             .get('/searchBedroom/:bedrooms', this.searchHouses)
             .delete('/:houseId', this.removeHouse)
+            .put('/:houseId', this.updateHouse)
     }
 
     async createHouses(request, response, next) {
@@ -55,6 +56,16 @@ export class HouseController extends BaseController {
             const houseId = request.params.houseId
             const message = await houseService.removeHouse(houseId)
             response.send(message)
+        } catch (error) {
+            next(error)
+        }
+    }
+    async updateHouse(request, response, next) {
+        try {
+            const houseId = request.params.houseId
+            const updateData = request.body
+            const house = await houseService.updateHouse(houseId, updateData)
+            response.send(house)
         } catch (error) {
             next(error)
         }

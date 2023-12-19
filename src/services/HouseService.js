@@ -30,6 +30,17 @@ class HouseService {
         await houseToRemove.remove()
         return `The ${houseToRemove.price} house built in ${houseToRemove.year} was removed`
     }
+    async updateHouse(houseId, updateData) {
+        const originalHouse = await this.getOneHouse(houseId)
+        originalHouse.bedrooms = updateData.bedrooms ? updateData.bedrooms : originalHouse.bedrooms
+        originalHouse.bathrooms = updateData.bathrooms ? updateData.bathrooms : originalHouse.bathrooms
+        originalHouse.year = updateData.year ? updateData.year : originalHouse.year
+        originalHouse.price = updateData.price ? updateData.price : originalHouse.price
+        originalHouse.imgUrl = updateData.imgUrl ? updateData.imgUrl : originalHouse.imgUrl
+        originalHouse.description = updateData.description ? updateData.description : originalHouse.description
+        await originalHouse.save()
+        return originalHouse
+    }
 
 
 }
