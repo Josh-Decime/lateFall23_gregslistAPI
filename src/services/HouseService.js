@@ -18,6 +18,10 @@ class HouseService {
         }
         return house
     }
+    async searchHouses(searchBedroom) {
+        const houses = await dbContext.House.find({ bedrooms: searchBedroom })
+        return houses
+    }
 
 
 }
