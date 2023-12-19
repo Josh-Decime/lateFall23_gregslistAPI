@@ -11,9 +11,13 @@ class HouseService {
         const houses = await dbContext.House.find()
         return houses
     }
-    // async getOneHouse(houseId){
-    //     const house = 
-    // }
+    async getOneHouse(houseId) {
+        const house = await dbContext.House.findById(houseId)
+        if (!house) {
+            throw new Error(`there is no house at this id: ${houseId}`)
+        }
+        return house
+    }
 
 
 }
